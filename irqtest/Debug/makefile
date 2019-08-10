@@ -12,6 +12,7 @@ RM := rm -rf
 -include sources.mk
 -include synergy/ssp/src/driver/r_ioport/subdir.mk
 -include synergy/ssp/src/driver/r_icu/subdir.mk
+-include synergy/ssp/src/driver/r_gpt/subdir.mk
 -include synergy/ssp/src/driver/r_fmi/subdir.mk
 -include synergy/ssp/src/driver/r_elc/subdir.mk
 -include synergy/ssp/src/driver/r_cgc/subdir.mk
@@ -71,7 +72,7 @@ all: irqtest.elf secondary-outputs
 irqtest.elf: $(OBJS) $(USER_OBJS) $(LINKER_SCRIPT)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GNU ARM Cross C Linker'
-	$(file > irqtest.elf.in,-mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O2 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Wlogical-op -Waggregate-return -Wfloat-equal  -g3 -T "C:\\REP2\\irqtest\\script/s7g2.ld" -Xlinker --gc-sections -L "C:\\REP2\\irqtest\\synergy\\ssp\\src\\bsp\\cmsis\\DSP_Lib\\cm4_gcc" -Wl,-Map,"irqtest.map" --specs=nano.specs --specs=rdimon.specs -o "irqtest.elf" -Wl,--start-group $(OBJS) $(USER_OBJS) $(LIBS) -Wl,--end-group)
+	$(file > irqtest.elf.in,-mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O2 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Wlogical-op -Waggregate-return -Wfloat-equal  -g3 -T "C:\\Users\\SEI403\\git\\integrador\\irqtest\\script/s7g2.ld" -Xlinker --gc-sections -L "C:\\Users\\SEI403\\git\\integrador\\irqtest\\synergy\\ssp\\src\\bsp\\cmsis\\DSP_Lib\\cm4_gcc" -Wl,-Map,"irqtest.map" --specs=nano.specs --specs=rdimon.specs -o "irqtest.elf" -Wl,--start-group $(OBJS) $(USER_OBJS) $(LIBS) -Wl,--end-group)
 	arm-none-eabi-gcc @"irqtest.elf.in"
 	@echo 'Finished building target: $@'
 	@echo ' '
